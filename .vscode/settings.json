@@ -2,6 +2,7 @@
   "files.associations": {
     "*.rmd": "markdown",
     "vector": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "unordered_map": "cpp"
   }
 }

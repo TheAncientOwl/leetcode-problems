@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-#include <map>
+#include <unordered_map>
 
 class Solution {
 public:
@@ -14,7 +14,7 @@ public:
      *   key:   I'm looking for this *key* value.
      *   value: The index where the complement is.
     */
-    std::map<int, int> lookingFor;
+    std::unordered_map<int, int> lookingFor;
 
     for (int i = 0, size = nums.size(); i < size; i++) {
       auto it = lookingFor.find(nums[i]);
