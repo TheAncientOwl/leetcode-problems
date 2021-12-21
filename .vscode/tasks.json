@@ -22,7 +22,7 @@
         "/Zi",
         "/EHsc",
         "/Fe:",
-        "${fileDirname}\\main.exe",
+        "${fileDirname}\\run.exe",
         "*.cpp"
       ],
       "problemMatcher": ["$msCompile"],
