@@ -1,57 +1,22 @@
 #include "ConsoleColorOutput.hpp"
 
 #include <iostream>
-#include <string>
-#include <string_view>
-#include <stack>
-
-/**
- * Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
- * An input string is valid if:
- * Open brackets must be closed by the same type of brackets.
- * Open brackets must be closed in the correct order.
- *
- * Example 1:
- * Input: s = "()"
- * Output: true
- *
- * Example 2:
- * Input: s = "()[]{}"
- * Output: true
- *
- * Example 3:
- * Input: s = "(]"
- * Output: false
- *
- * Constraints:
- * 1 <= s.length <= 104
- * s consists of parentheses only '()[]{}'.
-*/
+#include <vector>
 
 class Solution {
 public:
-  bool isValid(std::string_view s) {
-    std::stack<char> openParantheses;
+  int removeDuplicates(std::vector<int>& nums) {
+    if (nums.size() == 0)
+      return 0;
 
-    for (char c : s) {
-      if (c == '(' || c == '[' || c == '{')
-        openParantheses.push(c);
-      else {
-        if (openParantheses.empty())
-          return false;
-
-        char top = openParantheses.top();
-        openParantheses.pop();
-
-        if ((top == '(' && c != ')') || (top == '[' && c != ']') || (top == '{' && c != '}'))
-          return false;
-      }
+    int left = 0;
+    for (int right = 1, size = nums.size(); right < size; right++) {
+      if (nums[left] != nums[right])
+        left++;
+      nums[left] = nums[right];
     }
 
-    if (!openParantheses.empty())
-      return false;
-
-    return true;
+    return left + 1;
   }
 };
 
@@ -61,10 +26,10 @@ private:
 
 public:
   int id;
-  std::string_view value;
-  bool answer;
+  std::vector<int> value;
+  std::vector<int> answer;
 
-  Test(std::string_view value, bool answer) : id(Test::TestsCount++), value(value), answer(answer) {}
+  Test(std::vector<int> value, std::vector<int> answer) : id(Test::TestsCount++), value(value), answer(answer) {}
 };
 int Test::TestsCount = 1;
 
@@ -72,16 +37,29 @@ int main() {
   Solution sln;
 
   Test tests[] = {
-    Test("()", true),
-    Test("()[]{}", true),
-    Test("(]", false),
-    Test("([)]", false),
-    Test("()(", false),
+    Test({0, 0, 0, 1, 2, 3, 3, 3, 3, 4, 5, 6, 7, 8}, {0, 1, 2, 3, 4, 5, 6, 7, 8}),
+    Test({0, 1, 2, 3}, {0, 1, 2, 3}),
+    Test({0, 1, 2, 3, 3, 3}, {0, 1, 2, 3}),
+    Test({0, 1, 2, 3, 3}, {0, 1, 2, 3}),
+    Test({0, 0, 0, 1, 2, 3, 3}, {0, 1, 2, 3}),
   };
 
-  for (const auto& test : tests) {
-    if (sln.isValid(test.value) == test.answer) {
-      std::cout << ccolor::green << test.id << ". Passed!\n";
+  for (auto& test : tests) {
+    int newSize = sln.removeDuplicates(test.value);
+
+    if (newSize == test.answer.size()) {
+      bool ok = true;
+      for (int i = 0; i < newSize; i++) {
+        if (test.answer[i] != test.value[i]) {
+          ok = false;
+          break;
+        }
+      }
+
+      if (ok)
+        std::cout << ccolor::green << test.id << ". Passed!\n";
+      else
+        std::cout << ccolor::dark_red << test.id << ". Failed!\n";
     }
     else {
       std::cout << ccolor::dark_red << test.id << ". Failed!\n";
