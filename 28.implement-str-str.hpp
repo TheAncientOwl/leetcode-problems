@@ -5,6 +5,31 @@
 #include <string_view>
 #include <vector>
 
+/**
+ * Implement strStr().
+ * Return the index of the first occurrence of pattern in text, or -1 if pattern is not part of text.
+ *
+ * Clarification:
+ * What should we return when pattern is an empty string? This is a great question to ask during an interview.
+ * For the purpose of this problem, we will return 0 when pattern is an empty string. This is consistent to C's strstr() and Java's indexOf().
+ *
+ * Example 1:
+ * Input: text = "hello", pattern = "ll"
+ * Output: 2
+ *
+ * Example 2:
+ * Input: text = "aaaaa", pattern = "bba"
+ * Output: -1
+ *
+ * Example 3:
+ * Input: text = "", pattern = ""
+ * Output: 0
+ *
+ * Constraints:
+ * 0 <= text.length, pattern.length <= 5 * 104
+ * text and pattern consist of only lower-case English characters.
+*/
+
 // Implementation using KMP algorithm
 class Solution {
 private:
