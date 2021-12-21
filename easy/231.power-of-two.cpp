@@ -24,7 +24,7 @@
 
 class Solution {
 public:
-  bool isPowerOfTwo(int n) {
+  bool isPowerOfTwo(int n) const {
     if (n == 0)
       return false;
 
