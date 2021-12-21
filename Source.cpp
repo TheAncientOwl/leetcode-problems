@@ -5,18 +5,17 @@
 
 class Solution {
 public:
-  int removeDuplicates(std::vector<int>& nums) {
+  int removeElement(std::vector<int>& nums, int val) {
     if (nums.size() == 0)
       return 0;
 
-    int left = 0;
-    for (int right = 1, size = nums.size(); right < size; right++) {
-      if (nums[left] != nums[right])
-        left++;
-      nums[left] = nums[right];
+    int newSize = 0;
+    for (int current = 0, size = nums.size(); current < size; current++) {
+      if (nums[current] != val)
+        nums[newSize++] = nums[current];
     }
 
-    return left + 1;
+    return newSize;
   }
 };
 
@@ -28,8 +27,10 @@ public:
   int id;
   std::vector<int> value;
   std::vector<int> answer;
+  int element;
 
-  Test(std::vector<int> value, std::vector<int> answer) : id(Test::TestsCount++), value(value), answer(answer) {}
+  Test(std::vector<int> value, std::vector<int> answer, int element)
+    : id(Test::TestsCount++), value(value), answer(answer), element(element) {}
 };
 int Test::TestsCount = 1;
 
@@ -37,15 +38,16 @@ int main() {
   Solution sln;
 
   Test tests[] = {
-    Test({0, 0, 0, 1, 2, 3, 3, 3, 3, 4, 5, 6, 7, 8}, {0, 1, 2, 3, 4, 5, 6, 7, 8}),
-    Test({0, 1, 2, 3}, {0, 1, 2, 3}),
-    Test({0, 1, 2, 3, 3, 3}, {0, 1, 2, 3}),
-    Test({0, 1, 2, 3, 3}, {0, 1, 2, 3}),
-    Test({0, 0, 0, 1, 2, 3, 3}, {0, 1, 2, 3}),
+    Test({3, 2, 2, 3}, {2, 2}, 3),
+    Test({0, 1, 2, 2, 3, 0, 4, 2}, {0, 1, 3, 0, 4}, 2),
+    Test({0, 1, 2, 3, 4}, {0, 1, 2, 3, 4}, 5),
+    Test({0, 1, 2, 3, 4, 4, 4}, {0, 1, 2, 3}, 4),
+    Test({0, 1, 2, 2, 2, 2, 3, 4}, {0, 1, 3, 4}, 2),
+    Test({0, 0, 1, 2, 3, 4}, {1, 2, 3, 4}, 0),
   };
 
   for (auto& test : tests) {
-    int newSize = sln.removeDuplicates(test.value);
+    int newSize = sln.removeElement(test.value, test.element);
 
     if (newSize == test.answer.size()) {
       bool ok = true;
