@@ -22,8 +22,8 @@
         "/Zi",
         "/EHsc",
         "/Fe:",
-        "${fileDirname}\\${fileBasenameNoExtension}.exe",
-        "${file}"
+        "${fileDirname}\\main.exe",
+        "*.cpp"
       ],
       "problemMatcher": ["$msCompile"],
       "group": {
