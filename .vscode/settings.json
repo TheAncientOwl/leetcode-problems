@@ -56,6 +56,7 @@
     "xutility": "cpp",
     "deque": "cpp",
     "stack": "cpp",
-    "*.rh": "cpp"
+    "*.rh": "cpp",
+    "fstream": "cpp"
   }
 }
