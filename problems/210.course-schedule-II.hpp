@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <list>
 
 class Solution {
 public:
@@ -15,7 +14,7 @@ public:
     std::vector<int> dependenciesCount(numCourses, 0);
     std::vector<std::vector<int>> dependentCourses(numCourses, std::vector<int>());
 
-    std::list<int> depsFreeCourses;
+    std::vector<int> depsFreeCourses;
 
     // create datastructures
     for (const auto& deps : prerequisites) {
@@ -31,7 +30,7 @@ public:
 
     // complete courses
     while (sln.size() != numCourses) {
-      std::list<int> newDepsFreeCourses;
+      std::vector<int> newDepsFreeCourses;
 
       for (auto finishedCourse : depsFreeCourses) {
         sln.push_back(finishedCourse);
@@ -53,22 +52,6 @@ public:
   }
 };
 
-struct Test {
-private:
-  static int TestsCount;
-
-public:
-  int id;
-  int x;
-  int sqrt;
-
-
-  Test(int x, int sqrt)
-    : id(Test::TestsCount++), x(x), sqrt(sqrt) {}
-
-};
-int Test::TestsCount = 1;
-
 int main() {
   Solution sln;
 
@@ -89,25 +72,6 @@ int main() {
   }
 
   std::cout << sln.findOrder(numCourses, deps) << '\n';
-
-  // std::cout << deps << '\n';
-
-  // Test tests[] = {
-  //   Test(1, 1),
-  //   Test(0, 0),
-  //   Test(4, 2),
-  //   Test(25, 5),
-  //   Test(8, 2)
-  // };
-
-  // for (const auto& test : tests) {
-  //   if (sln.mySqrt(test.x) == test.sqrt) {
-  //     std::cout << ccolor::lime << test.id << ". Passed!\n";
-  //   }
-  //   else {
-  //     std::cout << ccolor::dark_red << test.id << ". Failed!\n";
-  //   }
-  // }
 
   return 0;
 }
