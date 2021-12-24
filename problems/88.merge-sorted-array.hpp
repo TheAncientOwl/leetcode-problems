@@ -42,7 +42,6 @@ private:
     for (std::size_t i = size - 1; i > index; --i) {
       vec[i] = vec[i - 1];
     }
-
   }
 
 public:
@@ -84,14 +83,14 @@ private:
 
 public:
   int id;
-  std::vector<int> nums1;
+  std::vector<int> input;
   std::size_t m;
   std::vector<int> nums2;
   std::size_t n;
   std::vector<int> output;
 
   Test(std::vector<int> nums1, std::size_t m, std::vector<int> nums2, std::size_t n, std::vector<int> output)
-    : id(Test::TestsCount++), nums1(nums1), m(m), nums2(nums2), n(n), output(output) {}
+    : id(Test::TestsCount++), input(nums1), m(m), nums2(nums2), n(n), output(output) {}
 
 };
 int Test::TestsCount = 1;
@@ -104,9 +103,9 @@ int main() {
   };
 
   for (auto& test : tests) {
-    sln.merge(test.nums1, test.m, test.nums2, test.n);
+    sln.merge(test.input, test.m, test.nums2, test.n);
 
-    if (test.nums1 == test.output) {
+    if (test.input == test.output) {
       std::cout << ccolor::lime << test.id << ". Passed!\n";
     }
     else {
