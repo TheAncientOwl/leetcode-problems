@@ -57,6 +57,7 @@
     "deque": "cpp",
     "stack": "cpp",
     "*.rh": "cpp",
-    "fstream": "cpp"
+    "fstream": "cpp",
+    "unordered_set": "cpp"
   }
 }
