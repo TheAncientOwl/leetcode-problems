@@ -14,7 +14,7 @@ std::ostream& ConsoleColorOutput::dark_blue(std::ostream& out)
 	return out;
 }
 
-std::ostream& ConsoleColorOutput::green(std::ostream& out)
+std::ostream& ConsoleColorOutput::dark_green(std::ostream& out)
 {
 	ConsoleColorOutput::setColor(2);
 	return out;
@@ -32,7 +32,7 @@ std::ostream& ConsoleColorOutput::dark_red(std::ostream& out)
 	return out;
 }
 
-std::ostream& ConsoleColorOutput::purple(std::ostream& out)
+std::ostream& ConsoleColorOutput::dark_purple(std::ostream& out)
 {
 	ConsoleColorOutput::setColor(5);
 	return out;
@@ -62,7 +62,7 @@ std::ostream& ConsoleColorOutput::light_blue(std::ostream& out)
 	return out;
 }
 
-std::ostream& ConsoleColorOutput::lime(std::ostream& out)
+std::ostream& ConsoleColorOutput::light_green(std::ostream& out)
 {
 	ConsoleColorOutput::setColor(10);
 	return out;
@@ -80,7 +80,7 @@ std::ostream& ConsoleColorOutput::light_red(std::ostream& out)
 	return out;
 }
 
-std::ostream& ConsoleColorOutput::pink(std::ostream& out)
+std::ostream& ConsoleColorOutput::light_purple(std::ostream& out)
 {
 	ConsoleColorOutput::setColor(13);
 	return out;

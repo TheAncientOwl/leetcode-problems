@@ -100,7 +100,7 @@ int main() {
 
   for (const auto& test : tests) {
     if (sln.kClosest(test.input, test.k) == test.output) {
-      std::cout << ccolor::green << test.id << ". Passed!\n";
+      std::cout << ccolor::dark_green << test.id << ". Passed!\n";
     }
     else {
       std::cout << ccolor::dark_red << test.id << ". Failed!\n";

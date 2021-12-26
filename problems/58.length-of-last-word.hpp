@@ -68,7 +68,7 @@ int main() {
 
   for (const auto& test : tests) {
     if (sln.lengthOfLastWord(test.str) == test.length) {
-      std::cout << ccolor::lime << test.id << ". Passed!\n";
+      std::cout << ccolor::light_green << test.id << ". Passed!\n";
     }
     else {
       std::cout << ccolor::dark_red << test.id << ". Failed!\n";

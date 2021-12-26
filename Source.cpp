@@ -1,53 +1,47 @@
-#include "ConsoleColorOutput.hpp"
-#include "other_ostreams.hpp"
+#include "Console.hpp"
+#include "ListNode.hpp"
 
 #include <iostream>
 #include <vector>
-#include <queue>
+using namespace ConsoleColorOutput;
+
+Console console;
+std::string(*str)(int) = std::to_string;
 
 class Solution {
-private:
-  struct Point {
-    std::vector<int> bounds;
-    double distance;
-
-    Point(int x, int y) {
-      bounds.reserve(2);
-      bounds.push_back(x);
-      bounds.push_back(y);
-
-      this->distance = x * x + y * y;
-    }
-  };
-
-  struct CompareDistance {
-    bool operator()(const Point& p1, const Point& p2) const {
-      return p1.distance < p2.distance;
-    }
-  };
-
 public:
-  std::vector<std::vector<int>> kClosest(const std::vector<std::vector<int>>& points, int k) {
-    std::vector<std::vector<int>> sln;
-    std::priority_queue<Point, std::vector<Point>, CompareDistance> kPoints;
+  ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    bool carry = false;
 
-    if (k == 0)
-      return sln;
-
-    for (const auto& point : points) {
-      kPoints.emplace(point[0], point[1]);
-
-      if (kPoints.size() > k)
-        kPoints.pop();
+    ListNode* head = new ListNode(l1->val + l2->val);
+    ListNode* tail = head;
+    if (head->val > 9) {
+      carry = true;
+      head->val = head->val % 10;
     }
 
-    sln.reserve(k);
-    while (!kPoints.empty()) {
-      sln.push_back(std::move(kPoints.top().bounds));
-      kPoints.pop();
+    ListNode* it1 = l1->next;
+    ListNode* it2 = l2->next;
+
+    while (it1 && it2) {
+      int value = it1->val + it2->val + carry;
+
+      if (value > 9) {
+        carry = true;
+        value = value % 10;
+      }
+      else
+        carry = false;
+
+      ListNode* newNode = new ListNode(value);
+      tail->next = newNode;
+      tail = newNode;
+
+      it1 = it1->next;
+      it2 = it2->next;
     }
 
-    return sln;
+    return head;
   }
 };
 
@@ -57,12 +51,12 @@ private:
 
 public:
   int id;
-  int k;
-  std::vector<std::vector<int>> input;
-  std::vector<std::vector<int>> output;
+  ListUtil l1;
+  ListUtil l2;
+  ListUtil output;
 
-  Test(std::vector<std::vector<int>> input, std::vector<std::vector<int>> output, int k)
-    : id(Test::TestsCount++), input(input), output(output), k(k) {}
+  Test(std::vector<int> l1, std::vector<int> l2, std::vector<int> output)
+    : id(Test::TestsCount++), l1(l1), l2(l1), output(output) {}
 };
 int Test::TestsCount = 1;
 
@@ -70,16 +64,19 @@ int main() {
   Solution sln;
 
   Test tests[] = {
-   Test({{1,3}, {-2, 2}}, {{-2, 2}}, 1),
-   Test({{3,3}, {5,-1}, {-2,4}}, {{-2,4}, {3, 3}}, 2),
+   Test({2,4,3}, {5,6,4}, {7,0,8}),
   };
 
   for (const auto& test : tests) {
-    if (sln.kClosest(test.input, test.k) == test.output) {
-      std::cout << ccolor::green << test.id << ". Passed!\n";
+    ListNode* resultHead = sln.addTwoNumbers(test.l1.head, test.l2.head);
+    printList(resultHead);
+
+    console.type("Test" + str(test.id));
+    if (test.output.equals(resultHead)) {
+      console.color(dark_green).log("Passed");
     }
     else {
-      std::cout << ccolor::dark_red << test.id << ". Failed!\n";
+      console.color(dark_red).log("Failed");
     }
   }
 

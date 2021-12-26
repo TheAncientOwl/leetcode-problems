@@ -92,7 +92,7 @@ int main() {
 
   for (const auto& test : tests) {
     if (sln.plusOne(test.digits) == test.plusOne) {
-      std::cout << ccolor::lime << test.id << ". Passed!\n";
+      std::cout << ccolor::light_green << test.id << ". Passed!\n";
     }
     else {
       std::cout << ccolor::dark_red << test.id << ". Failed!\n";

@@ -72,7 +72,7 @@ int main() {
     sln.deleteDuplicates(test.input.head);
 
     if (test.output.equals(test.input.head)) {
-      std::cout << ccolor::lime << test.id << ". Passed!\n";
+      std::cout << ccolor::light_green << test.id << ". Passed!\n";
     }
     else {
       std::cout << ccolor::dark_red << test.id << ". Failed!\n";

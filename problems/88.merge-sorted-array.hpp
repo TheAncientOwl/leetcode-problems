@@ -106,7 +106,7 @@ int main() {
     sln.merge(test.input, test.m, test.nums2, test.n);
 
     if (test.input == test.output) {
-      std::cout << ccolor::lime << test.id << ". Passed!\n";
+      std::cout << ccolor::light_green << test.id << ". Passed!\n";
     }
     else {
       std::cout << ccolor::dark_red << test.id << ". Failed!\n";

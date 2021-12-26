@@ -96,7 +96,7 @@ int main() {
       }
 
       if (ok)
-        std::cout << ccolor::green << test.id << ". Passed!\n";
+        std::cout << ccolor::dark_green << test.id << ". Passed!\n";
       else
         std::cout << ccolor::dark_red << test.id << ". Failed!\n";
     }
