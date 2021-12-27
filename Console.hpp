@@ -3,6 +3,7 @@
 #include <string>
 
 using ConsoleColor = std::ostream& (*)(std::ostream&);
+std::string(*str)(int) = std::to_string;
 
 class Console {
 private:
@@ -50,3 +51,5 @@ public:
     return this->type("Error").color(ccolor::dark_red).log(message);
   }
 };
+
+static Console console;
