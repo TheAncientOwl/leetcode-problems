@@ -42,9 +42,7 @@ public:
 
     ((std::cout << m_Sep << std::forward<Args>(args)), ...);
 
-    std::cout
-      << ccolor::dark_gray << "!"
-      << ccolor::reset << '\n';
+    std::cout << ccolor::reset << '\n';
 
     return *this;
   }
