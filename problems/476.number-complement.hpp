@@ -76,7 +76,7 @@ int main() {
       console.color(ccolor::dark_green).log("Passed");
     }
     else {
-      console.color(ccolor::dark_red).log("Passed");
+      console.color(ccolor::dark_red).log("Failed");
     }
   }
 
