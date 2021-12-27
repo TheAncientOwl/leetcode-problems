@@ -79,12 +79,12 @@ int main() {
   for (const auto& test : tests) {
     ListNode* resultHead = sln.addTwoNumbers(test.l1.head, test.l2.head);
 
-    console.type("Test" + str(test.id));
+    console.reset().sep("").type("Test", test.id);
     if (test.output.equals(resultHead)) {
       console.color(ccolor::dark_green).log("Passed");
     }
     else {
-      console.color(ccolor::dark_red).log("Failed");
+      console.color(ccolor::dark_red).log("Passed");
     }
   }
 

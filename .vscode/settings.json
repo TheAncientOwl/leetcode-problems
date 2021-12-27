@@ -60,6 +60,7 @@
     "fstream": "cpp",
     "unordered_set": "cpp",
     "numeric": "cpp",
-    "queue": "cpp"
+    "queue": "cpp",
+    "sstream": "cpp"
   }
 }
