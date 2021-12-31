@@ -1,15 +1,26 @@
+#include "Console.hpp"
 #include "TreeNode.hpp"
-#include <numeric>
+
+#include <vector>
 
 class Solution {
+private:
+  TreeNode* implSortedArrayToBST(int start, int end, const std::vector<int>& nums) {
+    if (start >= end)
+      return nullptr;
+
+    int mid = start + ((end - start) / 2);
+
+    TreeNode* newNode = new TreeNode(nums[mid]);
+    newNode->left = implSortedArrayToBST(start, mid, nums);
+    newNode->right = implSortedArrayToBST(mid + 1, end, nums);
+
+    return newNode;
+  }
+
 public:
-  int maxDepth(TreeNode* root, int currentDepth = 1) {
-    if (!root)
-      return currentDepth - 1;
-
-    currentDepth++;
-
-    return std::max(maxDepth(root->left, currentDepth), maxDepth(root->right, currentDepth));
+  TreeNode* sortedArrayToBST(const std::vector<int>& nums) {
+    return implSortedArrayToBST(0, nums.size(), nums);
   }
 };
 
