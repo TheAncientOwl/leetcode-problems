@@ -1,54 +1,21 @@
-#include "Console.hpp"
+#include "TreeNode.hpp"
+#include <limits>
+#include <numeric>
 
 class Solution {
 public:
-  int smallestRepunitDivByK(int k) {
-    long long  sum = 1;
+  int maxAncestorDiff(TreeNode* root, int min = INT_MAX, int max = INT_MIN) {
+    if (!root)
+      return max - min;
 
-    for (int i = 1; i <= k; i++) {
-      if (sum % k == 0)
-        return i;
+    min = std::min(min, root->val);
+    max = std::max(max, root->val);
 
-      sum = (sum * 10 + 1) % k;
-    }
-
-    return -1;
+    return std::max(maxAncestorDiff(root->left, min, max), maxAncestorDiff(root->right, min, max));
   }
 };
-
-struct Test {
-private:
-  static int TestsCount;
-
-public:
-  int id;
-  int input;
-  int output;
-
-  Test(int input, int output)
-    : id(Test::TestsCount++), input(input), output(output) {}
-};
-int Test::TestsCount = 1;
 
 int main() {
-  Solution sln;
-
-  Test tests[] = {
-   Test(1, 1),
-   Test(2, -1),
-   Test(3, 3),
-  };
-
-  for (const auto& test : tests) {
-    if (sln.smallestRepunitDivByK(test.input) == test.output) {
-      console.reset().type("Test", test.id).color(ccolor::dark_green).sep("")
-        .log("Passed", ccolor::dark_gray, '!').reset();
-    }
-    else {
-      console.reset().type("Test", test.id).color(ccolor::dark_red).sep("")
-        .log("Failed", ccolor::dark_gray, '!').reset();
-    }
-  }
 
   return 0;
 }
