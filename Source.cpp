@@ -4,29 +4,21 @@
 #include <numeric>
 
 class Solution {
-private:
-  int getDepth(TreeNode* node, bool& out) {
-    if (!node || !out)
+public:
+  int minDepth(TreeNode* root) {
+    if (!root)
       return 0;
 
-    int left = this->getDepth(node->left, out);
-    int right = this->getDepth(node->right, out);
+    if (!root->left && !root->right)
+      return 1;
 
-    if (std::abs(left - right) > 1)
-      out = false;
+    if (!root->left)
+      return 1 + minDepth(root->right);
 
-    return 1 + std::max(left, right);
-  }
+    if (!root->right)
+      return 1 + minDepth(root->left);
 
-public:
-  bool isBalanced(TreeNode* root) {
-    if (!root)
-      return true;
-
-    bool result = true;
-    this->getDepth(root, result);
-
-    return result;
+    return 1 + std::min(minDepth(root->left), minDepth(root->right));
   }
 };
 
