@@ -1,17 +1,15 @@
 #include "TreeNode.hpp"
-#include <limits>
 #include <numeric>
 
 class Solution {
 public:
-  int maxAncestorDiff(TreeNode* root, int min = INT_MAX, int max = INT_MIN) {
+  int maxDepth(TreeNode* root, int currentDepth = 1) {
     if (!root)
-      return max - min;
+      return currentDepth - 1;
 
-    min = std::min(min, root->val);
-    max = std::max(max, root->val);
+    currentDepth++;
 
-    return std::max(maxAncestorDiff(root->left, min, max), maxAncestorDiff(root->right, min, max));
+    return std::max(maxDepth(root->left, currentDepth), maxDepth(root->right, currentDepth));
   }
 };
 
